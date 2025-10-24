@@ -1,0 +1,9 @@
+{
+  "ts": "2025-10-23T01:44:36.642Z",
+  "taskId": 80953648406,
+  "resp": {
+    "errorId": 12,
+    "errorCode": "ERROR_CAPTCHA_UNSOLVABLE",
+    "errorDescription": "Workers could not solve the Captcha"
+  }
+}

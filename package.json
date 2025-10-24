@@ -1,0 +1,23 @@
+{
+  "name": "voter",
+  "version": "1.0.0",
+  "main": "rotate_clicks_proxies.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "commonjs",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.12.2",
+    "fs-extra": "^11.3.2",
+    "node-fetch": "^3.3.2",
+    "puppeteer": "^24.26.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-proxy": "^1.0.2",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "socks-proxy-agent": "^8.0.5"
+  }
+}

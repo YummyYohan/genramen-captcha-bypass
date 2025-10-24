@@ -1,0 +1,98 @@
+<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"/><meta name="keywords" content="Collective Audience, Collective Audience SDK, BeOpinion, BeOpinion SDK, SDK, Widget, Third-party, BeOp"/><title>Collective Audience</title><link rel="icon" type="image/png" sizes="48x48" href="/public/favicon-48x48.png"/><link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32x32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/public/favicon-16x16.png"/><link rel="shortcut icon" href="/public/favicon.ico"/><style>body {
+        margin: 0;
+      }</style><script>const getParam = (param, defaultValue) =>
+        decodeURI(
+          (document.location.search
+            .slice(1)
+            .split("&")
+            .map((x) => x.split("="))
+            .find((x) => x[0] == encodeURI(param)) || [, defaultValue])[1]
+        );
+
+      const lang = getParam("lang", "en");
+      const creative = getParam("creative", "missing");
+      const channel = getParam("channel", "");
+
+      document.addEventListener("DOMContentLoaded", (event) => {
+        const targetedElement = document.querySelector(".mtcaptcha");
+        if (targetedElement) {
+          targetedElement.setAttribute("id", creative);
+        }
+      });
+
+      const sendMessage = (message) =>
+        window.parent.postMessage(
+          channel + "mtcaptcha=" + JSON.stringify(message),
+          "*"
+        );
+
+      const mt_jsloadedcb = () => {
+        const message = {
+          creative,
+          mtEvent: "loaded",
+        };
+        sendMessage(message);
+      };
+      const mt_renderedcb = (state) => {
+        const message = {
+          creative,
+          mtEvent: "rendered",
+          mtState: state,
+        };
+        sendMessage(message);
+      };
+      const mt_verifiedcb = (state) => {
+        const message = {
+          creative,
+          mtEvent: "verified",
+          mtState: state,
+          token: state.verifiedToken,
+        };
+        sendMessage(message);
+      };
+      const mt_verifyexpiredcb = (state) => {
+        const message = {
+          creative,
+          mtEvent: "expired",
+          mtState: state,
+        };
+        sendMessage(message);
+      };
+      const mt_errorcb = (state) => {
+        const message = {
+          creative,
+          mtEvent: "error",
+          mtState: state,
+        };
+        sendMessage(message);
+      };
+
+      var mtcaptchaConfig = {
+        sitekey: "MTPublic-UJO5aa0iQ",
+        lang: lang,
+        renderQueue: [creative],
+        "jsloaded-callback": mt_jsloadedcb,
+        "rendered-callback": mt_renderedcb,
+        "verified-callback": mt_verifiedcb,
+        "verifyexpired-callback": mt_verifyexpiredcb,
+        "error-callback": mt_errorcb,
+      };
+
+      (function () {
+        const mt_service = document.createElement("script");
+        mt_service.async = true;
+        mt_service.src =
+          "https://service.mtcaptcha.com/mtcv1/client/mtcaptcha.min.js";
+        (
+          document.getElementsByTagName("head")[0] ||
+          document.getElementsByTagName("body")[0]
+        ).appendChild(mt_service);
+        const mt_service2 = document.createElement("script");
+        mt_service2.async = true;
+        mt_service2.src =
+          "https://service2.mtcaptcha.com/mtcv1/client/mtcaptcha2.min.js";
+        (
+          document.getElementsByTagName("head")[0] ||
+          document.getElementsByTagName("body")[0]
+        ).appendChild(mt_service2);
+      })();</script></head><body><div class="mtcaptcha"></div></body></html>
